@@ -1,1 +1,1 @@
-# Tritpo labs
+# Tritpo labs==================-   [lab 1](https://github.com/vampir9939/laba1)-   [lab 2](https://github.com/vampir9939/Tritpo/tree/master/MyWeather) 
