@@ -1,1 +1,1 @@
-# Tritpo labs==================-   [lab 1](https://github.com/vampir9939/laba1)-   [lab 2](https://github.com/vampir9939/Tritpo/tree/master/MyWeather) 
+# Tritpo labs==================-   [lab 1 - фракталы](https://github.com/vampir9939/laba1)-   [lab 2 - SRS](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/SRS)-   [lab 3 - Flow of Events](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/FlowOfEvents) 
