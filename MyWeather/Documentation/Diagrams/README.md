@@ -1,1 +1,4 @@
-# MyWeatherДанный проект преднезначен для всех людей которые хотят выйти на улицу в своём городе, ведь всегда нужно одеваться и собираться по погоде.MyWeather позволяет правильно собраться исходя из:* Температуры* Типа ветра(направление, скорость)* Влажности* Давления-   [SRS](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/SRS.md)-   [Flow of Events](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/FlowOfEvents.md) 
+# 1) Обновление информации
+![UseCase](https://github.com/vampir9939/Tritpo/blob/master/MyWeather/Documentation/Diagrams/UpdateInfo.png "UpdateInfo")
+# 2) Выбор города
+![UseCase](https://github.com/vampir9939/Tritpo/blob/master/MyWeather/Documentation/Diagrams/ChooseSity.png "ChooseSity")
