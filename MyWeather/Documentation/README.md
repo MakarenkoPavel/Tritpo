@@ -1,6 +1,6 @@
 -   [SRS](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/SRS.md)
 -   [Flow of Events](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/FlowOfEvents.md)
--   [Diagrams](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/Diagrams/README.md)
+-   [Diagrams](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/Diagrams)
 
 	1)[Activity](https://github.com/vampir9939/Tritpo/tree/master/MyWeather/Documentation/Diagrams/Activity/README.md)
   
