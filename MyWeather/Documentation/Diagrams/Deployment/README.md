@@ -1,1 +1,0 @@
-#Диаграмма развертывания![DeploymentDiagram](https://github.com/vampir9939/Tritpo/blob/master/MyWeather/Documentation/Diagrams/Deployment/DeploymentDiagram.png "DeploymentDiagram")

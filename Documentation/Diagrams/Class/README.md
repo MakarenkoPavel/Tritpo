@@ -1,0 +1,1 @@
+# Диаграмма классов![DClass](https://github.com/vampir9939/Tritpo/blob/master/Documentation/Diagrams/Class/Class.png "Class")

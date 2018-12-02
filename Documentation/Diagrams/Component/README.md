@@ -1,0 +1,1 @@
+# Диаграмма компонентов![components](https://github.com/vampir9939/Tritpo/blob/master/Documentation/Diagrams/Component/components.png "components")

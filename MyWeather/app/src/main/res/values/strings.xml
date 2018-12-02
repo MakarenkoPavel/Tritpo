@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyWeather</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="_1_sity">1 Sity</string>
+    <string name="_2_sity">2 Sity</string>
+    <string name="_3_sity">3 sity</string>
+    <string name="Now">Сейчас</string>
+    <string name="_48h">48 часов</string>
+    <string name="Week">Неделя</string>
+    <string name="NowTime">Сейчас:</string>
+    <string name="home">Home</string>
+    <string name="_0">0</string>
+</resources>

@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">MyWeather</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="sity_1">sity_1</string>
-    <string name="sity_2">sity_2</string>
-    <string name="sity_3">sity_3</string>
-</resources>

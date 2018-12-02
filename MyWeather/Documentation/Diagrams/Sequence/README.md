@@ -1,1 +1,0 @@
-#Диаграммы последовательностей## 1) Смена города![CCity](https://github.com/vampir9939/Tritpo/blob/master/MyWeather/Documentation/Diagrams/Sequence/ChengeCity.png "City")## 2) Обновление информации![ReInf](https://github.com/vampir9939/Tritpo/blob/master/MyWeather/Documentation/Diagrams/Sequence/ReloadInf.png "ReInf")

@@ -1,1 +1,0 @@
-# Диаграмма классов![DClass](https://github.com/vampir9939/Tritpo/blob/master/MyWeather/Documentation/Diagrams/Class/Class.png "Class")
