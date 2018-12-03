@@ -1,123 +1,153 @@
 package com.labs.myweather;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
+import static com.labs.myweather.R.color.colorDefoltSity;
+import static com.labs.myweather.R.color.colorSity;
+import static com.labs.myweather.R.color.colorWite;
+import static com.labs.myweather.R.id.bSity1;
+
 public class MainActivity extends AppCompatActivity {
+    Button bTest;
+    TextView mDateTxt;
+    TextView mTextMessage1;
+    TextView mTextMessage2;
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
+    int pos_sity = 1;
+    Button bSity1;
+    Button bSity2;
+    Button bSity3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        bTest = findViewById(R.id.button);
+        mDateTxt = (TextView)findViewById(R.id.DateTxt);
+        mTextMessage2 = (TextView)findViewById(R.id.message2);
+        mTextMessage1 = (TextView)findViewById(R.id.message);
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        bSity1 = (Button)findViewById(R.id.bSity1);
+        bSity2 = (Button)findViewById(R.id.bSity2);
+        bSity3 = (Button)findViewById(R.id.bSity3);
+
+        CurrentTime currentTime = new CurrentTime();
+        new Thread(currentTime).start();
     }
 
+    public void onCliclRefresh(View view) {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void onClickbSity(View view) {
+        switch (view.getId()) {
+            case R.id.bSity1:
+                if(pos_sity != 1) {
+                    pos_sity = 1;
+                    bSity1.setBackgroundColor(getResources().getColor(colorSity));
+                    bSity2.setBackgroundColor(getResources().getColor(colorWite));
+                    bSity3.setBackgroundColor(getResources().getColor(colorWite));
+                }
+                else {
+                    Intent intent = new Intent(this, SearchSity.class);
+                    startActivityForResult(intent, 1);
+                }
+                break;
+
+            case R.id.bSity2:
+                if(pos_sity != 2) {
+                    pos_sity = 2;
+                    bSity1.setBackgroundColor(getResources().getColor(colorWite));
+                    bSity2.setBackgroundColor(getResources().getColor(colorSity));
+                    bSity3.setBackgroundColor(getResources().getColor(colorWite));
+                }
+                else {
+                    Intent intent = new Intent(this, SearchSity.class);
+                    startActivityForResult(intent, 1);
+                }
+                break;
+
+            case R.id.bSity3:
+                if(pos_sity != 3) {
+                    pos_sity = 3;
+                    bSity1.setBackgroundColor(getResources().getColor(colorWite));
+                    bSity2.setBackgroundColor(getResources().getColor(colorWite));
+                    bSity3.setBackgroundColor(getResources().getColor(colorSity));
+                }
+                else {
+                    Intent intent = new Intent(this, SearchSity.class);
+                    startActivityForResult(intent, 1);
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(resultCode == RESULT_OK){
+            switch (requestCode){
+                case 1:
+                    String str = data.getStringExtra("ans");
+                    mTextMessage2.setText(str);
+                    break;
+            }
+        }
+    }
+
+    class CurrentTime implements Runnable {
+        SimpleDateFormat format;
+        Calendar calendar;
+        boolean stopMode;
+
+        CurrentTime() {
+            this.format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            this.calendar = Calendar.getInstance();
+            this.stopMode = false;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
+        public void StopThread(){
+            this.stopMode = true;
         }
 
         @Override
-        public Fragment getItem(int position) {
-            switch (position)
+        public void run() {
+            while(true)
             {
-                case 0:
-                    Frame1 frame1 = new Frame1();
-                    return frame1;
-                case 1:
-                    Frame2 frame2 = new Frame2();
-                    return frame2;
-                case 2:
-                    Frame3 frame3 = new Frame3();
-                    return frame3;
-                default:
-                    return null;
-            }
-        }
+                if (stopMode)
+                    return;
 
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
+                calendar = Calendar.getInstance();
+                runOnUiThread(new Runnable() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        mDateTxt.setText("Сегодня: " + format.format(calendar.getTime()));
+                    }
+                });
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 0:
-                    return "Sity 1";
-                case 1:
-                    return "Sity 2";
-                case 2:
-                    return "Sity 3";
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            return null;
         }
     }
 }

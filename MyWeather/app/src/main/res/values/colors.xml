@@ -3,5 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="SityColor">#d7df00</color>
+    <color name="colorSity">#d7df00</color>
+    <color name="colorMode">#06c2f6</color>
+    <color name="colorDefoltSity">#fdf4c8</color>
+    <color name="colorWite">#ffffff</color>
 </resources>
