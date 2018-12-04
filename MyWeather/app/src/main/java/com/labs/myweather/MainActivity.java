@@ -139,16 +139,19 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     JSONObject main_object = response.getJSONObject("main");
-                    JSONArray array = response.getJSONArray("weather");
-                    JSONObject object = array.getJSONObject(0);
-                    String temp = String.valueOf(main_object.getDouble("temp"));
-                    String description = object.getString("description");
-                    String city = response.getString("name");
+                    String temp = String.valueOf(main_object.getDouble("temp") - 273);
+                    String humidity = String.valueOf(main_object.getInt("humidity"));
+                    String pressure = String.valueOf(main_object.getInt("pressure"));
+
+                    JSONObject wind_object = response.getJSONObject("wind");
+                    String wind_speed = String.valueOf(wind_object.getInt("speed"));
 
                     Log.d("request",response.toString());
-                    Log.d("request",temp);
-                    Log.d("request",description);
-                    Log.d("request",city);
+
+                    Log.d("request",temp + "граджусов цельсия");
+                    Log.d("request",humidity + "влажность");
+                    Log.d("request",wind_speed + "скорость ветра");
+                    Log.d("request", pressure + "давление");
 
                 } catch (JSONException e) {
                     Log.d("request","error" + e.toString());
