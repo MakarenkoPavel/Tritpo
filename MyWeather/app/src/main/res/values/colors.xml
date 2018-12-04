@@ -7,4 +7,5 @@
     <color name="colorMode">#06c2f6</color>
     <color name="colorDefoltSity">#fdf4c8</color>
     <color name="colorWite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
 </resources>

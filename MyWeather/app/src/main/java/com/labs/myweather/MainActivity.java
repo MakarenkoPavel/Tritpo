@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bTest = findViewById(R.id.button);
         mDateTxt = (TextView)findViewById(R.id.DateTxt);
 
         bSity1 = (Button)findViewById(R.id.bSity1);
@@ -218,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
             UpdatingTargetWeather(str);
         }
     }
+
+    //18.00,0.00.6/00,
 
     public void UpdatingTargetWeather(String Sity) {
         final Context context = this;
