@@ -10,6 +10,8 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,8 +40,9 @@ import static com.labs.myweather.R.color.colorSity;
 import static com.labs.myweather.R.color.colorWite;
 
 public class MainActivity extends AppCompatActivity {
-    Button bTest;
     TextView mDateTxt;
+
+    Context context = this;
 
     int pos_sity = 1;
     Button bSity1;
@@ -53,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
     TextView mPressure;
     ImageView imageView;
 
+    TextView mDayPos2;
+    TextView mDayPos3;
+    TextView mDayPos4;
+    TextView mTemp2;
+    TextView mTemp3;
+    TextView mTemp4;
+    ImageView imageView2;
+    ImageView imageView3;
+    ImageView imageView4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         final Context context = this;
         final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
-        refreshLayout.setColorScheme(R.color.colorSity, R.color.colorWite, R.color.colorAccent, R.color.colorMode);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -71,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         if(bSity1.getText() != getResources().getString(R.string._1_sity)) {
                             UpdatingTargetWeather(bSity1.getText().toString());
+                            UpdatingWeekWeather(bSity1.getText().toString());
                             Toast toast = Toast.makeText(context,"Обновление", LENGTH_SHORT);
                             toast.show();
                         }
@@ -78,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         if(bSity2.getText() != getResources().getString(R.string._2_sity)) {
                             UpdatingTargetWeather(bSity2.getText().toString());
+                            UpdatingWeekWeather(bSity2.getText().toString());
                             Toast toast = Toast.makeText(context,"Обновление", LENGTH_SHORT);
                             toast.show();
                         }
@@ -85,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         if(bSity3.getText() != getResources().getString(R.string._3_sity)) {
                             UpdatingTargetWeather(bSity3.getText().toString());
+                            UpdatingWeekWeather(bSity3.getText().toString());
                             Toast toast = Toast.makeText(context,"Обновление", LENGTH_SHORT);
                             toast.show();
                         }
@@ -94,6 +109,16 @@ public class MainActivity extends AppCompatActivity {
                 refreshLayout.setRefreshing(false);
             }
         });
+
+        mDayPos2 = (TextView) findViewById(R.id.mDayPos2);
+        mDayPos3 = (TextView) findViewById(R.id.mDayPos3);
+        mDayPos4 = (TextView) findViewById(R.id.mDayPos4);
+        mTemp2 = (TextView) findViewById(R.id.mTemp2);
+        mTemp3 = (TextView) findViewById(R.id.mTemp3);
+        mTemp4 = (TextView) findViewById(R.id.mTemp4);
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
+        imageView3 = (ImageView) findViewById(R.id.imageView3);
+        imageView4 = (ImageView) findViewById(R.id.imageView4);
 
         mDateTxt = (TextView)findViewById(R.id.DateTxt);
 
@@ -112,10 +137,6 @@ public class MainActivity extends AppCompatActivity {
         new Thread(currentTime).start();
     }
 
-    public void onCliclRefresh(View view) {
-        UpdatingTargetWeather("Minsk");
-    }
-
     @SuppressLint({"ResourceAsColor", "ResourceType"})
     public void onClickbSity(View view) {
         switch (view.getId()) {
@@ -127,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     bSity3.setBackgroundColor(getResources().getColor(colorWite));
                     if(bSity1.getText().toString() != getResources().getString(R.string._1_sity)) {
                         UpdatingTargetWeather(bSity1.getText().toString());
+                        UpdatingWeekWeather(bSity1.getText().toString());
                     } else {
                         mDayPos.setText("No Info");
                         mTemp.setText("No Info");
@@ -150,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     bSity3.setBackgroundColor(getResources().getColor(colorWite));
                     if(bSity2.getText() != getResources().getString(R.string._2_sity)) {
                         UpdatingTargetWeather(bSity2.getText().toString());
+                        UpdatingWeekWeather(bSity2.getText().toString());
                     } else {
                         mDayPos.setText("No Info");
                         mTemp.setText("No Info");
@@ -173,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     bSity3.setBackgroundColor(getResources().getColor(colorSity));
                     if(bSity3.getText() != getResources().getString(R.string._3_sity)) {
                         UpdatingTargetWeather(bSity3.getText().toString());
+                        UpdatingWeekWeather(bSity3.getText().toString());
                     } else {
                         mDayPos.setText("No Info");
                         mTemp.setText("No Info");
@@ -215,8 +239,89 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             UpdatingTargetWeather(str);
+            UpdatingWeekWeather(str);
         }
     }
+
+    public void UpdatingWeekWeather(String Sity) {
+        Log.d("request","startRequest");
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + Sity + "&cnt=8&appid=88d38b3803dc8b14d526103d3b9f6474";
+
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                ParsJson parsJson = null;
+                try {
+                    Log.d("TestPars", "startPars");
+                    parsJson = new ParsJson(response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Log.d("TestPars", parsJson.list[1].weather.toString());
+
+                LoadImage loadImage;
+                LoadImage loadImage2;
+                LoadImage loadImage3;
+
+                Log.d("ParsStr",parsJson.list[1].dt_txt);
+                Log.d("ParsStr",parsJson.list[2].dt_txt);
+                Log.d("ParsStr",parsJson.list[3].dt_txt);
+
+                Log.d("ParsStr",ParsDayPos.ParsDayPos(parsJson.list[1].dt_txt));
+                Log.d("ParsStr",ParsDayPos.ParsDayPos(parsJson.list[2].dt_txt));
+                Log.d("ParsStr",ParsDayPos.ParsDayPos(parsJson.list[3].dt_txt));
+
+                Log.d("ParsStr",String.valueOf(parsJson.list[1].main.temp));
+                Log.d("ParsStr",String.valueOf(parsJson.list[2].main.temp));
+                Log.d("ParsStr",String.valueOf(parsJson.list[3].main.temp));
+
+                Log.d("ParsStr", parsJson.list[1].weather[0].icon);
+                Log.d("ParsStr", parsJson.list[2].weather[0].icon);
+                Log.d("ParsStr", parsJson.list[3].weather[0].icon);
+
+                mDayPos2.setText(ParsDayPos.ParsDayPos(parsJson.list[1].dt_txt));
+                mDayPos3.setText(ParsDayPos.ParsDayPos(parsJson.list[2].dt_txt));
+                mDayPos4.setText(ParsDayPos.ParsDayPos(parsJson.list[3].dt_txt));
+
+                mTemp2.setText(String.valueOf(parsJson.list[1].main.temp) + "°С");
+                mTemp3.setText(String.valueOf(parsJson.list[2].main.temp) + "°С");
+                mTemp4.setText(String.valueOf(parsJson.list[3].main.temp) + "°С");
+
+                try {
+                    loadImage = new LoadImage(new URL("http://api.openweathermap.org/img/w/" + parsJson.list[1].weather[0].icon +".png"), imageView2);
+                    new Thread(loadImage).start();
+                } catch (MalformedURLException e) {
+                    Log.d("ParsStr","Error: " + e.toString());
+                    e.printStackTrace();
+                }
+                try {
+                    loadImage2 = new LoadImage(new URL("http://api.openweathermap.org/img/w/" + parsJson.list[2].weather[0].icon +".png"), imageView3);
+                    new Thread(loadImage2).start();
+                } catch (MalformedURLException e) {
+                    Log.d("ParsStr","Error: " + e.toString());
+                    e.printStackTrace();
+                }
+                try {
+                    loadImage3 = new LoadImage(new URL("http://api.openweathermap.org/img/w/" + parsJson.list[3].weather[0].icon +".png"), imageView4);
+                    new Thread(loadImage3).start();
+                } catch (MalformedURLException e) {
+                    Log.d("ParsStr","Error: " + e.toString());
+                    e.printStackTrace();
+                }
+            }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast toast = Toast.makeText(context, "Отсутствует подключение к интернету", LENGTH_SHORT);
+                    toast.show();
+                    Log.d("request", error.toString());
+                }
+            });
+            RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jor);
+        Log.d("request","stopRequest");
+        }
+
 
     //18.00,0.00.6/00,
 
@@ -248,7 +353,15 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("request",wind_speed + "скорость ветра");
                     Log.d("request", pressure + "давление");
 
-                    mDayPos.setText("День");
+                    String daypos = "No Info";
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Calendar calendar = Calendar.getInstance();
+                    try {
+                        daypos = ParsDayPos.ParsCurrentDayPos(format.format(calendar.getTime()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    mDayPos.setText(daypos);
                     mTemp.setText(temp + "°С");
                     mHumidity.setText(humidity + "% влажности");
                     mWindSpeed.setText(wind_speed + " м/с");
@@ -280,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("request","stopRequest");
     }
 
-    class CurrentTime implements Runnable {
+    public class CurrentTime implements Runnable {
         SimpleDateFormat format;
         Calendar calendar;
         boolean stopMode;
@@ -319,7 +432,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    class LoadImage implements Runnable {
+    public class LoadImage implements Runnable {
         boolean stopMode;
         URL url;
         ImageView imageView;

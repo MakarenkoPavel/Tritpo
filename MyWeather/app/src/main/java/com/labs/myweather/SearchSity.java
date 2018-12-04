@@ -60,9 +60,7 @@ public class SearchSity extends AppCompatActivity {
     public void onClickSearch(View view) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         numbersList.setLayoutManager(layoutManager);
-
         numbersList.setHasFixedSize(true);
-
         numbersAdapter = new NumbersAdapter(6, this);
         numbersList.setAdapter(numbersAdapter);
     }
