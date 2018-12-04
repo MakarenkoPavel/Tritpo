@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -56,6 +58,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Context context = this;
+        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        refreshLayout.setColorScheme(R.color.colorSity, R.color.colorWite, R.color.colorAccent, R.color.colorMode);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                Log.d("Swipe","start");
+
+                switch (pos_sity) {
+                    case 1:
+                        if(bSity1.getText() != getResources().getString(R.string._1_sity)) {
+                            UpdatingTargetWeather(bSity1.getText().toString());
+                            Toast toast = Toast.makeText(context,"Обновление", LENGTH_SHORT);
+                            toast.show();
+                        }
+                        break;
+                    case 2:
+                        if(bSity2.getText() != getResources().getString(R.string._2_sity)) {
+                            UpdatingTargetWeather(bSity2.getText().toString());
+                            Toast toast = Toast.makeText(context,"Обновление", LENGTH_SHORT);
+                            toast.show();
+                        }
+                        break;
+                    case 3:
+                        if(bSity3.getText() != getResources().getString(R.string._3_sity)) {
+                            UpdatingTargetWeather(bSity3.getText().toString());
+                            Toast toast = Toast.makeText(context,"Обновление", LENGTH_SHORT);
+                            toast.show();
+                        }
+                        break;
+                }
+                Log.d("Swipe","finish");
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
         bTest = findViewById(R.id.button);
         mDateTxt = (TextView)findViewById(R.id.DateTxt);
 
@@ -78,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         UpdatingTargetWeather("Minsk");
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "ResourceType"})
     public void onClickbSity(View view) {
         switch (view.getId()) {
             case R.id.bSity1:
@@ -89,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
                     bSity3.setBackgroundColor(getResources().getColor(colorWite));
                     if(bSity1.getText().toString() != getResources().getString(R.string._1_sity)) {
                         UpdatingTargetWeather(bSity1.getText().toString());
+                    } else {
+                        mDayPos.setText("No Info");
+                        mTemp.setText("No Info");
+                        mHumidity.setText("No Info");
+                        mWindSpeed.setText("No Info");
+                        mPressure.setText("No Info");
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
                     }
                 }
                 else {
@@ -105,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
                     bSity3.setBackgroundColor(getResources().getColor(colorWite));
                     if(bSity2.getText() != getResources().getString(R.string._2_sity)) {
                         UpdatingTargetWeather(bSity2.getText().toString());
+                    } else {
+                        mDayPos.setText("No Info");
+                        mTemp.setText("No Info");
+                        mHumidity.setText("No Info");
+                        mWindSpeed.setText("No Info");
+                        mPressure.setText("No Info");
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
                     }
                 }
                 else {
@@ -121,6 +174,13 @@ public class MainActivity extends AppCompatActivity {
                     bSity3.setBackgroundColor(getResources().getColor(colorSity));
                     if(bSity3.getText() != getResources().getString(R.string._3_sity)) {
                         UpdatingTargetWeather(bSity3.getText().toString());
+                    } else {
+                        mDayPos.setText("No Info");
+                        mTemp.setText("No Info");
+                        mHumidity.setText("No Info");
+                        mWindSpeed.setText("No Info");
+                        mPressure.setText("No Info");
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
                     }
                 }
                 else {

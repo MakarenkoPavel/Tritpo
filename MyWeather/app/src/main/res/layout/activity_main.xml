@@ -1,176 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/bSity1"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:background="@color/colorSity"
-        android:onClick="onClickbSity"
-        android:text="@string/_1_sity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bSity2"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="34dp"
-        android:background="@color/colorWite"
-        android:onClick="onClickbSity"
-        android:text="@string/_2_sity"
-        app:layout_constraintEnd_toStartOf="@+id/bSity3"
-        app:layout_constraintStart_toEndOf="@+id/bSity1"
-        app:layout_constraintTop_toBottomOf="@+id/DateTxt" />
+            <Button
+                android:id="@+id/bSity1"
+                android:layout_width="110dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="64dp"
+                android:background="@color/colorSity"
+                android:onClick="onClickbSity"
+                android:text="@string/_1_sity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bSity3"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/colorWite"
-        android:onClick="onClickbSity"
-        android:text="@string/_3_sity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/bSity2"
+                android:layout_width="110dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="34dp"
+                android:background="@color/colorWite"
+                android:onClick="onClickbSity"
+                android:text="@string/_2_sity"
+                app:layout_constraintEnd_toStartOf="@+id/bSity3"
+                app:layout_constraintStart_toEndOf="@+id/bSity1"
+                app:layout_constraintTop_toBottomOf="@+id/DateTxt" />
 
-    <Button
-        android:id="@+id/bMode1"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorMode"
-        android:text="@string/Now"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/bSity3"
+                android:layout_width="110dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/colorWite"
+                android:onClick="onClickbSity"
+                android:text="@string/_3_sity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bMode2"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/_48h"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bMode3"
-        app:layout_constraintStart_toEndOf="@+id/bMode1" />
+            <Button
+                android:id="@+id/bMode1"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorMode"
+                android:text="@string/Now"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/bMode3"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/Week"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <Button
+                android:id="@+id/bMode2"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/_48h"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bMode3"
+                app:layout_constraintStart_toEndOf="@+id/bMode1" />
 
-    <TextView
-        android:id="@+id/DateTxt"
-        android:layout_width="265dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/NowTime"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/bMode3"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/Week"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="onCliclRefresh"
-        android:text="Start timer"
-        app:layout_constraintBottom_toTopOf="@+id/bMode2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/DateTxt"
+                android:layout_width="265dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/NowTime"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/mDayPos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:text="No info"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bSity2" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="onCliclRefresh"
+                android:text="Start timer"
+                app:layout_constraintBottom_toTopOf="@+id/bMode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/mTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="No info"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/mDayPos" />
+            <TextView
+                android:id="@+id/mDayPos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                android:text="No info"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bSity2" />
 
-    <TextView
-        android:id="@+id/mHumidity"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="No info"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/mTemp" />
+            <TextView
+                android:id="@+id/mTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No info"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/mDayPos" />
 
-    <TextView
-        android:id="@+id/mWindSpeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="No info"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/mHumidity" />
+            <TextView
+                android:id="@+id/mHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No info"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/mTemp" />
 
-    <TextView
-        android:id="@+id/mPressure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="No info"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/mWindSpeed" />
+            <TextView
+                android:id="@+id/mWindSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No info"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/mHumidity" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="129dp"
-        android:layout_height="129dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mDayPos"
-        app:srcCompat="?android:attr/actionModeSelectAllDrawable"
-        tools:srcCompat="?android:attr/accessibilityFocusedDrawable" />
+            <TextView
+                android:id="@+id/mPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No info"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/mWindSpeed" />
 
-</android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="129dp"
+                android:layout_height="129dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mDayPos"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+        </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
