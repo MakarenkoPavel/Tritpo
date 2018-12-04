@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class SearchSity extends AppCompatActivity {
-    public Button bTest;
     private RecyclerView numbersList;
     private NumbersAdapter numbersAdapter;
 
@@ -29,11 +31,30 @@ public class SearchSity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-
-        //Intent intent = new Intent();
-        //intent.putExtra("ans","helloWorld");
-        //setResult(RESULT_OK, intent);
-        //finish();
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.bback:
+                setResult(RESULT_CANCELED, intent);
+                finish();
+                break;
+            case R.id.bReturn:
+                if (numbersAdapter == null) {
+                    Toast toast = Toast.makeText(this, "Элемент не выбран", LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                if (numbersAdapter.ans == "") {
+                    Toast toast = Toast.makeText(this, "Элемент не выбран", LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                else {
+                    intent.putExtra("ans",numbersAdapter.ans);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                break;
+        }
     }
 
     public void onClickSearch(View view) {
@@ -42,7 +63,7 @@ public class SearchSity extends AppCompatActivity {
 
         numbersList.setHasFixedSize(true);
 
-        numbersAdapter = new NumbersAdapter(20, this);
+        numbersAdapter = new NumbersAdapter(6, this);
         numbersList.setAdapter(numbersAdapter);
     }
 }

@@ -2,8 +2,6 @@ package com.labs.myweather;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,17 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.widget.Toast.LENGTH_SHORT;
-import static com.labs.myweather.R.color.colorMode;
-import static com.labs.myweather.R.color.colorSity;
-import static com.labs.myweather.R.color.colorWite;
 
 public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumbersViewHolder> {
     private static int viewHolderCount;
     private int numberItems;
 
     private Context parent;
+    String Sity[] = {"Minsk","Polatsk","Navapolatsk","Svetlogorsk","Baranavichy", "Malinovka"};
 
-    public int pos;
+    public String ans = "";
 
     public NumbersAdapter(int numberOfItems, Context parent) {
         numberItems = numberOfItems;
@@ -43,7 +39,7 @@ public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumbersV
         View view = inflater.inflate(layuotIdForListItem, viewGroup, false);
 
         NumbersViewHolder viewHolder = new NumbersViewHolder(view);
-        viewHolder.viewHolderIndex.setText("ViewHolderindex: " + viewHolderCount);
+        viewHolder.viewHolderIndex.setText(Sity[viewHolderCount]);
 
         viewHolderCount++;
 
@@ -79,6 +75,8 @@ public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumbersV
 
                     Toast toast = Toast.makeText(parent, "Элемент " + positionIndex + " выбран", LENGTH_SHORT);
                     toast.show();
+
+                    ans = viewHolderIndex.getText().toString();
                 }
             });
         }

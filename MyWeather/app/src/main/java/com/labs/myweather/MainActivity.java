@@ -1,27 +1,37 @@
 package com.labs.myweather;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
-import static com.labs.myweather.R.color.colorDefoltSity;
+import static android.widget.Toast.LENGTH_SHORT;
 import static com.labs.myweather.R.color.colorSity;
 import static com.labs.myweather.R.color.colorWite;
-import static com.labs.myweather.R.id.bSity1;
 
 public class MainActivity extends AppCompatActivity {
     Button bTest;
     TextView mDateTxt;
-    TextView mTextMessage1;
-    TextView mTextMessage2;
 
     int pos_sity = 1;
     Button bSity1;
@@ -35,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         bTest = findViewById(R.id.button);
         mDateTxt = (TextView)findViewById(R.id.DateTxt);
-        mTextMessage2 = (TextView)findViewById(R.id.message2);
-        mTextMessage1 = (TextView)findViewById(R.id.message);
 
         bSity1 = (Button)findViewById(R.id.bSity1);
         bSity2 = (Button)findViewById(R.id.bSity2);
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCliclRefresh(View view) {
-
+        FindWeather();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -105,10 +113,59 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode){
                 case 1:
                     String str = data.getStringExtra("ans");
-                    mTextMessage2.setText(str);
+                    switch (pos_sity) {
+                        case 1:
+                            bSity1.setText(str);
+                            break;
+                        case 2:
+                            bSity2.setText(str);
+                            break;
+                        case 3:
+                            bSity3.setText(str);
+                            break;
+                    }
                     break;
             }
         }
+    }
+
+    public void FindWeather() {
+        final Context context = this;
+        Log.d("request","startRequest");
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=Minsk&appid=88d38b3803dc8b14d526103d3b9f6474";
+
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject main_object = response.getJSONObject("main");
+                    JSONArray array = response.getJSONArray("weather");
+                    JSONObject object = array.getJSONObject(0);
+                    String temp = String.valueOf(main_object.getDouble("temp"));
+                    String description = object.getString("description");
+                    String city = response.getString("name");
+
+                    Log.d("request",response.toString());
+                    Log.d("request",temp);
+                    Log.d("request",description);
+                    Log.d("request",city);
+
+                } catch (JSONException e) {
+                    Log.d("request","error" + e.toString());
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast toast = Toast.makeText(context, "Отсутствует подключение к интернету", LENGTH_SHORT);
+                toast.show();
+                Log.d("request", error.toString());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jor);
+        Log.d("request","stopRequest");
     }
 
     class CurrentTime implements Runnable {
