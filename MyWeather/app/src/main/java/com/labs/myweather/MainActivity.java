@@ -159,14 +159,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class _package {
-        public String temp;
-        public String huidity;
-        public String wind_speed;
-        public String pressure;
-        public String id_icon;
-    }
-
     public void UpdatingTargetWeather(String Sity) {
         final Context context = this;
         Log.d("request","startRequest");
